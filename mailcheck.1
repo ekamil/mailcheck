@@ -1,0 +1,132 @@
+.TH MAILCHECK 1 
+.SH NAME
+mailcheck \- Check multiple mailboxes and/or Maildirs for mail
+.SH SYNOPSIS
+.B mailcheck
+.I "[-l]"
+.SH "DESCRIPTION"
+.B mailcheck
+is a simple, configurable tool that allows multiple mailboxes to be
+checked for the existence of mail.  For local mail, it supports both
+the traditional mbox format and the newer Maildir (qmail) format.
+Mail can also be checked for on remote servers using either the POP3 or
+IMAP protocol.
+.PP
+Typically, one would invoke
+.BR mailcheck
+in /etc/profile or a user-specific login script.
+E-mail junkies may also find it useful to invoke
+.BR mailcheck
+occasionally to check for new mail in alternate mailboxes.
+.PP
+The author uses 
+.BR mailcheck
+to keep track of messages arriving in mailboxes corresponding
+to several mailing lists he subscribes to.
+.SH OPTIONS
+.TP
+.B \-l
+Runs
+.B mailcheck
+in login mode.  If a
+.B ~/.hushlogin
+file exists, mailcheck will exit silently.  This option is intended
+to be used on systems that invoke mailcheck from a global login script
+such as
+.B /etc/profile.
+.SH CONFIGURATION
+.PP
+Configuring
+.B mailcheck
+is simple.  Upon startup,
+.B mailcheck
+looks for a file called
+.B .mailcheckrc
+in the user's home directory.  If that file does not exist, the
+default configuration file
+.B /etc/mailcheckrc
+is used instead.
+.PP
+Lines beginning with a hash sign (
+.B #
+) are treated as comments and will not be processed.
+Lines beginning with
+.B pop3:
+or
+.B imap:
+are parsed like URLs and used to connect to network mail servers.
+All other lines
+are treated as pathnames to mailbox files or Maildir directories.
+.PP
+Environment variables in the format
+.B $(NAME)
+will be expanded inline.  For example:
+.TP
+.B /var/spool/mail/$(USER)
+Will check the user's mailbox in
+.B /var/spool/mail.
+.TP
+.B $(HOME)/Mailbox
+Will check the default Maildir used by qmail installations.
+.PP
+When connecting to POP3 or IMAP servers, the account password is not
+stored in the mailcheckrc file.  Instead, the
+.B .netrc
+file in the user's home directory is used.  This file, originally
+intended for use with
+.IR ftp (1)
+and later used by
+.IR fetchmail (1),
+should be readable only by the user owning it.  It stores
+server/user/password combinations in the form:
+
+machine
+.I servername
+login
+.I username
+password
+.I password
+.SH FILES
+.TP
+.B /etc/mailcheckrc
+This is the site-default mailcheck configuration file.  It should be
+edited by the system administrator to meet the needs of most users on
+the system.
+.TP
+.B ~/.mailcheckrc
+This is the user-specific mailcheck configuration file.  If it exists
+for a particular user, the site-default configuration file will not
+be used.
+.TP
+.B ~/.netrc
+This tells
+.B mailcheck
+what password to use for a given server/user combination when checking
+POP3 or IMAP mail.
+.SH COPYRIGHT
+Copyright (C) 1996, 1997, 1998, 2001, Jefferson E. Noxon.
+.PP
+Portions Copyright (C) 1996, Free Software Foundation, Inc.
+.PP
+Portions Copyright (C) 1996, Gordon Matzigkeit.
+.PP
+Portions Copyright (C) 1998, Trent Piepho.
+.PP
+Other copyrights may apply.
+.PP
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+.PP
+On Debian GNU/Linux see /usr/doc/copyright/GPL
+.SH AUTHOR
+Mailcheck was written for Debian GNU/Linux by Jefferson E. Noxon
+<jeff@planetfall.com>.
+.SH ACKNOWLEDGEMENTS
+POP3 and IMAP support was added by Rob Funk <rfunk@funknet.net>.
+.SH BUGS
+It is probably not a good idea to store passwords in a .netrc file.
+.SH SEE ALSO
+biff(1), mail(1), fetchmail(1), netrc(5), ftp(1)
+

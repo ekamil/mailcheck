@@ -1,0 +1,17 @@
+Source: mailcheck
+Section: mail
+Priority: extra
+Maintainer: Kevin Coyner <kcoyner@debian.org>
+Build-Depends: debhelper (>= 5.0), dpatch
+Standards-Version: 3.7.2
+
+Package: mailcheck
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Check multiple mailboxes/maildirs for mail
+ Mailcheck is a simple, configurable tool that allows multiple mailboxes
+ to be checked for the existence of new mail messages.  It supports both
+ mbox and maildir-style mailboxes for compatibility with most mail
+ transport agents.  It also supports remote POP3 and IMAP mailboxes.
+ .
+  Homepage: http://mailcheck.sourceforge.net/

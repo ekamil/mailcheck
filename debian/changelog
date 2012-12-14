@@ -1,0 +1,84 @@
+mailcheck (1.91.2-2) unstable; urgency=low
+
+  * Added advanced_counting patch from Tomas Hoger <thoger@pobox.sk>.
+  * Created new patch to removing stripping in Makefile. Closes: #437550.
+  * Added Tomas Hoger <thoger@pobox.sk> to debian/copyright.
+  * Changed distclean invocation in debian/rules and cleaned up some cruft.
+  * New e-mail address for maintainer. Changed throughout debian/* files.
+
+ -- Kevin Coyner <kcoyner@debian.org>  Tue, 14 Aug 2007 12:53:50 -0400
+
+mailcheck (1.91.2-1) unstable; urgency=low
+
+  * New maintainer. Closes: #404469.
+  * debian/control:
+    + Updated debhelper to version 5.0
+    + Updated Standards-Version to 3.7.2
+    + Added dpatch as a Build-Depends
+    + Minor grammatical correction in long description
+    + Added homepage link.
+  * Reorganized debian/copyright.
+  * debian/rules:
+    + Added appropriate language for using dpatch
+    + Cleaned up unneeded comments, obsolete dh_installmanpages
+  * Added debian/compat file.
+  * Removed debian/conffiles, since dh_installdeb adds any conffiles
+    automatically
+  * Applied patch that corrects problems with @'s in username.  Thanks to
+    Martin Wickman, who provided this patch more than 2 years ago.
+    Closes: #272749.
+  * Acknowledge NMU from and thanks extended to Daniel Schepler.
+    Closes: #190484.
+  * Uploaded original source files to SourceForge (mailcheck) in order to
+    convert this package from a Debian native to a normal package.
+  * Added debian/watch file.
+
+ -- Kevin Coyner <kevin@rustybear.com>  Sat, 3 Mar 2007 06:26:05 -0500
+
+mailcheck (1.91.1) unstable; urgency=low
+
+  * NMU.
+  * Add Build-Depends on debhelper.  Closes: #190484.
+
+ -- Daniel Schepler <schepler@debian.org>  Sun,  3 Aug 2003 00:55:16 -0700
+
+mailcheck (1.91) unstable; urgency=low
+
+  * Applied patch to add POP3 & IMAP support (closes: Bug#96911)
+  * Don't report negative mail messages on invalid maildirs (closes: Bug#97163)
+  * Updated to debian-policy 3.5.4.0
+  * "copyright" file pointed to wrong directory on Debian systems
+
+ -- Jefferson E. Noxon <jeff@debian.org>  Fri, 11 May 2001 17:04:01 -0500
+
+mailcheck (1.0) unstable; urgency=low
+
+  * Updated to debian-policy 3.0.1.1
+  * Changed maintainer address
+
+ -- Jefferson E. Noxon <jeff@debian.org>  Wed, 15 Sep 1999 14:36:31 -0500
+
+mailcheck (0.98) unstable; urgency=low
+
+  * First public release
+  * Converted to debhelper
+
+ -- Jefferson E. Noxon <jeff@planetfall.com>  Wed, 26 Aug 1998 14:27:49 -0500
+
+mailcheck (0.97) unstable; urgency=low
+
+  * Updated to libc6
+
+ -- Jefferson E. Noxon <jeff@planetfall.com>  Thu,  5 Mar 1998 14:15:51 -0600
+
+mailcheck (0.91) unstable; urgency=low
+
+  * Added rc file support
+
+ -- Jefferson E. Noxon <jeff@planetfall.com>  Fri, 27 Dec 1996 15:45:26 -0600
+
+mailcheck (0.9) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Jefferson E. Noxon <jeff@planetfall.com>  Fri, 27 Dec 1996 13:45:35 -0600

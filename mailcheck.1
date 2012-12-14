@@ -1,91 +1,85 @@
-.TH MAILCHECK 1 
+.TH MAILCHECK 1 "2 July 2005"
+
 .SH NAME
-mailcheck \- Check multiple mailboxes and/or Maildirs for mail
+mailcheck \- Check multiple mailboxes and/or Maildirs for new mail
+
 .SH SYNOPSIS
-.B mailcheck
-.I "[-l]"
-.SH "DESCRIPTION"
-.B mailcheck
-is a simple, configurable tool that allows multiple mailboxes to be
-checked for the existence of mail.  For local mail, it supports both
-the traditional mbox format and the newer Maildir (qmail) format.
-Mail can also be checked for on remote servers using either the POP3 or
-IMAP protocol.
+\fBmailcheck\fP [-lbcsh] [-f rcfile]
+
+.SH DESCRIPTION
+\fBmailcheck\fP is a simple, configurable tool that allows multiple
+mailboxes to be checked for the existence of mail.  For local mail, it
+supports both the traditional mbox format and the newer Maildir format.  Mail
+can also be checked for on remote servers using either the POP3 or IMAP
+protocol.
 .PP
-Typically, one would invoke
-.BR mailcheck
-in /etc/profile or a user-specific login script.
-E-mail junkies may also find it useful to invoke
-.BR mailcheck
-occasionally to check for new mail in alternate mailboxes.
+Typically, one would invoke \fBmailcheck\fP in /etc/profile or a
+user-specific login script.  E-mail junkies may also find it useful to
+invoke \fBmailcheck\fP occasionally to check for new mail in alternate
+mailboxes.
 .PP
-The author uses 
-.BR mailcheck
-to keep track of messages arriving in mailboxes corresponding
-to several mailing lists he subscribes to.
+The author uses \fBmailcheck\fP to keep track of messages arriving in
+mailboxes corresponding to several mailing lists he subscribes to.
+
 .SH OPTIONS
 .TP
-.B \-l
-Runs
-.B mailcheck
-in login mode.  If a
-.B ~/.hushlogin
-file exists, mailcheck will exit silently.  This option is intended
-to be used on systems that invoke mailcheck from a global login script
-such as
-.B /etc/profile.
+\fB\-l\fP
+Runs \fBmailcheck\fP in login mode.  If a \fI~/.hushlogin\fP file exists,
+mailcheck will exit silently.  This option is intended to be used on
+systems that invoke mailcheck from a global login script such as
+\fI/etc/profile\fP.
+.TP
+\fB\-b\fP
+Brief mode.  Produces less verbose output.  If mailbox or Maildir is inside
+user's home direcory, only relative path is printed to output.
+.TP
+\fB\-c\fP
+Use more advanced counting method.  While counting mails, \fBmailcheck\fP
+looks inside mboxes and Maildirs and count new and unread messages
+separately.  If mbox/maildir does not contain any new or unread mail, it's
+excluded from report.  Produced output contains more valuable information, but
+this method is more time-consuming.
+.TP
+\fB\-s\fP
+Print "no mail" summary.  If no new mail message is found, print at least "no
+mail message" at the end.  Only makes sense in combination with \fB\-c\fP.
+.TP
+\fB\-f\fP
+Specify alternative rc file location.  If provided, default locations (see
+\fBFILES\fP) are not checked.
+.TP
+\fB\-h\fP
+Print short usage information.
+
 .SH CONFIGURATION
-.PP
-Configuring
-.B mailcheck
-is simple.  Upon startup,
-.B mailcheck
-looks for a file called
-.B .mailcheckrc
-in the user's home directory.  If that file does not exist, the
-default configuration file
-.B /etc/mailcheckrc
+Configuring \fBmailcheck\fP is simple.  Upon startup, \fBmailcheck\fP looks
+for a file called \fB.mailcheckrc\fP in the user's home directory.  If that
+file does not exist, the default configuration file \fB/etc/mailcheckrc\fP
 is used instead.
 .PP
-Lines beginning with a hash sign (
-.B #
-) are treated as comments and will not be processed.
-Lines beginning with
-.B pop3:
-or
-.B imap:
-are parsed like URLs and used to connect to network mail servers.
-All other lines
-are treated as pathnames to mailbox files or Maildir directories.
+Lines beginning with a hash sign (\fB#\fP) are treated as comments and will
+not be processed.  Lines beginning with \fBpop3:\fP or \fBimap:\fP are
+parsed like URLs and used to connect to network mail servers.  All other
+lines are treated as pathnames to mailbox files or Maildir directories.
 .PP
-Environment variables in the format
-.B $(NAME)
-will be expanded inline.  For example:
+Environment variables in the format \fB$(NAME)\fP will be expanded inline.
+For example: 
 .TP
-.B /var/spool/mail/$(USER)
-Will check the user's mailbox in
-.B /var/spool/mail.
+\fB/var/spool/mail/$(USER)\fP 
+Will check the user's mailbox in \fB/var/spool/mail\fP.
 .TP
-.B $(HOME)/Mailbox
-Will check the default Maildir used by qmail installations.
+\fB$(HOME)/Mailbox\fP
+Will check the default mailbox used by qmail installations.
 .PP
-When connecting to POP3 or IMAP servers, the account password is not
-stored in the mailcheckrc file.  Instead, the
-.B .netrc
-file in the user's home directory is used.  This file, originally
-intended for use with
-.IR ftp (1)
-and later used by
-.IR fetchmail (1),
-should be readable only by the user owning it.  It stores
-server/user/password combinations in the form:
+When connecting to POP3 or IMAP servers, the account password is not stored
+in the mailcheckrc file.  Instead, the \fB.netrc\fP file in the user's home
+directory is used.  This file, originally intended for use with
+\fIftp\fP(1) and later used by \fIfetchmail\fP(1), should be readable only
+by the user owning it.  It stores server/user/password combinations in the
+form:
 
-machine
-.I servername
-login
-.I username
-password
-.I password
+machine \fIservername\fP login \fIusername\fP password \fIpassword\fP
+
 .SH FILES
 .TP
 .B /etc/mailcheckrc
@@ -99,10 +93,9 @@ for a particular user, the site-default configuration file will not
 be used.
 .TP
 .B ~/.netrc
-This tells
-.B mailcheck
-what password to use for a given server/user combination when checking
-POP3 or IMAP mail.
+This tells \fBmailcheck\fP what password to use for a given server/user
+combination when checking POP3 or IMAP mail.
+
 .SH COPYRIGHT
 Copyright (C) 1996, 1997, 1998, 2001, Jefferson E. Noxon.
 .PP
@@ -119,14 +112,22 @@ it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
 (at your option) any later version.
 .PP
-On Debian GNU/Linux see /usr/doc/copyright/GPL
+On Debian GNU/Linux see /usr/share/common-licenses/GPL
+
 .SH AUTHOR
 Mailcheck was written for Debian GNU/Linux by Jefferson E. Noxon
 <jeff@planetfall.com>.
+
 .SH ACKNOWLEDGEMENTS
 POP3 and IMAP support was added by Rob Funk <rfunk@funknet.net>.
+.PP
+Several enhancements by Tomas Hoger <thoger@pobox.sk>.
+
 .SH BUGS
 It is probably not a good idea to store passwords in a .netrc file.
+.PP
+No SSL/TLS support for POP3 and IMAP.
+
 .SH SEE ALSO
-biff(1), mail(1), fetchmail(1), netrc(5), ftp(1)
+netrc(5), mbox(5), maildir(5), login(1), fetchmail(1)
 

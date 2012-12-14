@@ -228,8 +228,8 @@ parse_netrc (file)
 			     premature_token);
 #else
 	      fprintf (stderr,
-		       _
-		       ("mailcheck: %s:%d: warning: found \"%s\" before any host names\n"),
+		       _("mailcheck: %s:%d: warning: found \"%s\" before any "
+			 "host names\n"),
 		       file, ln, premature_token);
 #endif
 	      premature_token = NULL;
@@ -269,8 +269,8 @@ parse_netrc (file)
 	      else
 		{
 		  fprintf (stderr,
-			   _("mailcheck: %s:%d: warning: unknown token \"%s\"\n"), file,
-			   ln, tok);
+			   _("mailcheck: %s:%d: warning: unknown token "
+			     "\"%s\"\n"), file, ln, tok);
 		}
 	    }
 	}

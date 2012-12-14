@@ -1,0 +1,4 @@
+patching file mailcheck.1
+patching file mailcheck.c
+patching file mailcheckrc
+patching file netrc.c

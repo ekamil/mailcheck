@@ -2,29 +2,11 @@
 # Uncomment this to turn on verbose mode.
 # export DH_VERBOSE=1
 
-build: patch build-stamp
+build: build-stamp
 build-stamp:
 	dh_testdir
 	$(MAKE) all
 	touch build-stamp
-
-clean: clean-patched unpatch
-
-clean-patched:
-	dh_testdir
-	dh_testroot
-	rm -f build-stamp install-stamp
-	[ ! -f Makefile ] || $(MAKE) distclean
-	dh_clean
-
-patch: patch-stamp
-patch-stamp:
-	dpatch apply-all
-	dpatch cat-all >patch-stamp
-
-unpatch:
-	dpatch deapply-all
-	rm -rf patch-stamp debian/patched
 
 install: install-stamp
 install-stamp: build-stamp
@@ -62,4 +44,4 @@ source diff:
 	@echo >&2 'source and diff are obsolete - use dpkg-source -b'; false
 
 binary: binary-indep binary-arch
-.PHONY: build clean binary-indep binary-arch binary install patch unpatch clean-patched
+.PHONY: build clean binary-indep binary-arch binary install

@@ -1,10 +1,10 @@
 all: mailcheck
 
-debug: mailcheck.c netrc.c netrc.h socket.c
-	$(CC) -Wall -O0 mailcheck.c netrc.c socket.c -g -o mailcheck
+debug: mailcheck.c
+	$(CC) -Wall -O0 mailcheck.c -g -o mailcheck
 
-mailcheck: mailcheck.c netrc.c netrc.h socket.c
-	$(CC) -Wall -O2 mailcheck.c netrc.c socket.c -o mailcheck
+mailcheck: mailcheck.c
+	$(CC) -Wall -O2 mailcheck.c -o mailcheck
 
 install: mailcheck
 	install mailcheck $(prefix)/usr/bin

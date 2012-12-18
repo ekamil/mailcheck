@@ -4,14 +4,12 @@
 mailcheck \- Check multiple mailboxes and/or Maildirs for new mail
 
 .SH SYNOPSIS
-\fBmailcheck\fP [-lbcsh] [-f rcfile]
+\fBmailcheck\fP [-sh] [-f rcfile]
 
 .SH DESCRIPTION
 \fBmailcheck\fP is a simple, configurable tool that allows multiple
 mailboxes to be checked for the existence of mail.  For local mail, it
-supports both the traditional mbox format and the newer Maildir format.  Mail
-can also be checked for on remote servers using either the POP3 or IMAP
-protocol.
+supports both the traditional mbox format and the newer Maildir format.
 .PP
 Typically, one would invoke \fBmailcheck\fP in /etc/profile or a
 user-specific login script.  E-mail junkies may also find it useful to
@@ -23,26 +21,9 @@ mailboxes corresponding to several mailing lists he subscribes to.
 
 .SH OPTIONS
 .TP
-\fB\-l\fP
-Runs \fBmailcheck\fP in login mode.  If a \fI~/.hushlogin\fP file exists,
-mailcheck will exit silently.  This option is intended to be used on
-systems that invoke mailcheck from a global login script such as
-\fI/etc/profile\fP.
-.TP
-\fB\-b\fP
-Brief mode.  Produces less verbose output.  If mailbox or Maildir is inside
-user's home direcory, only relative path is printed to output.
-.TP
-\fB\-c\fP
-Use more advanced counting method.  While counting mails, \fBmailcheck\fP
-looks inside mboxes and Maildirs and count new and unread messages
-separately.  If mbox/maildir does not contain any new or unread mail, it's
-excluded from report.  Produced output contains more valuable information, but
-this method is more time-consuming.
-.TP
 \fB\-s\fP
 Print "no mail" summary.  If no new mail message is found, print at least "no
-mail message" at the end.  Only makes sense in combination with \fB\-c\fP.
+mail message" at the end.
 .TP
 \fB\-f\fP
 Specify alternative rc file location.  If provided, default locations (see
@@ -58,9 +39,8 @@ file does not exist, the default configuration file \fB/etc/mailcheckrc\fP
 is used instead.
 .PP
 Lines beginning with a hash sign (\fB#\fP) are treated as comments and will
-not be processed.  Lines beginning with \fBpop3:\fP or \fBimap:\fP are
-parsed like URLs and used to connect to network mail servers.  All other
-lines are treated as pathnames to mailbox files or Maildir directories.
+not be processed.  All other lines are treated as pathnames to mailbox files
+or Maildir directories.
 .PP
 Environment variables in the format \fB$(NAME)\fP will be expanded inline.
 For example: 
@@ -71,14 +51,6 @@ Will check the user's mailbox in \fB/var/spool/mail\fP.
 \fB$(HOME)/Mailbox\fP
 Will check the default mailbox used by qmail installations.
 .PP
-When connecting to POP3 or IMAP servers, the account password is not stored
-in the mailcheckrc file.  Instead, the \fB.netrc\fP file in the user's home
-directory is used.  This file, originally intended for use with
-\fIftp\fP(1) and later used by \fIfetchmail\fP(1), should be readable only
-by the user owning it.  It stores server/user/password combinations in the
-form:
-
-machine \fIservername\fP login \fIusername\fP password \fIpassword\fP
 
 .SH FILES
 .TP
@@ -91,10 +63,6 @@ the system.
 This is the user-specific mailcheck configuration file.  If it exists
 for a particular user, the site-default configuration file will not
 be used.
-.TP
-.B ~/.netrc
-This tells \fBmailcheck\fP what password to use for a given server/user
-combination when checking POP3 or IMAP mail.
 
 .SH COPYRIGHT
 Copyright (C) 1996, 1997, 1998, 2001, Jefferson E. Noxon.

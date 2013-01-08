@@ -1,4 +1,10 @@
-mailcheck (1.91.2-2.1) unstable; urgency=low
+mailcheck (1.91.2-2-ke2) unstable; urgency=low
+
+  * Usage information updated.
+
+ -- Kamil Essekkat <kamil@essekkat.pl>  Tue, 08 Jan 2013 10:06:39 +0100
+
+mailcheck (1.91.2-2-ke1) unstable; urgency=low
 
   * Non-maintainer upload.
   * Removed pop3 and imap support.

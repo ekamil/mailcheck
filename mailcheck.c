@@ -40,7 +40,7 @@ struct {
 void 
 print_usage(void)
 {
-  printf("Usage: mailcheck [-bchls] [-f rcfile]\n"
+  printf("Usage: mailcheck [-hs] [-f rcfile]\n"
          "\n"
          "Options:\n"
          "  -s  - show \"no mail\" summary, if no new mail was found\n"

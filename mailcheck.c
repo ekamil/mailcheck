@@ -29,7 +29,9 @@
 
 /* Global variables */
 char *Homedir;			/* Home directory pathname */
-unsigned short have_mail= 0;	/* Any mail found? */
+char info[4000];
+unsigned short global_new = 0;
+unsigned short global_unread = 0;
 struct {
   unsigned short show_summary;		/* see '-s' option */
   char *rcfile_path;			/* see '-f' option */
@@ -300,9 +302,9 @@ check_for_mail (char *tmppath)
         if (check_mbox(mailpath, &new, &read, &unread) == -1)
           return;
 	if (new > 0 || unread > 0) {
-          printf("%s: %d new and %d unread message(s)\n",
-                mailpath, new, unread);
-          have_mail= 1;
+          sprintf(info, "%s: %d new and %d unread message(s)\n", mailpath, new, unread);
+          global_new += new;
+          global_unread += unread;
         }
     }
     /* Is it directory? (if yes, it should be maildir ;) */
@@ -316,9 +318,9 @@ check_for_mail (char *tmppath)
 	  return;
 	}
 	if (new > 0 || unread > 0) {
-          printf("%s: %d new and %d unread message(s)\n",
-                mailpath, new, unread);
-          have_mail= 1;
+          sprintf(info, "%s: %d new and %d unread message(s)\n", mailpath, new, unread);
+          global_new += new;
+          global_unread += unread;
         }
     } else {
       fprintf(stderr, "mailcheck: error, %s is not mbox or maildir\n",
@@ -385,9 +387,15 @@ main (int argc, char *argv[])
 	check_for_mail (buf);
     }
 
-  if (Options.show_summary  &&  !have_mail) {
+  if (Options.show_summary) {
+    if (!global_new && !global_unread) {
       printf("no new mail\n");
+    } else {
+      printf("Total %d new %d unread\n", global_new, global_unread);
     }
+  } else {
+    printf(info);
+  }
   
   fclose(rcfile);
   free(Homedir);

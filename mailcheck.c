@@ -387,12 +387,8 @@ main (int argc, char *argv[])
 	check_for_mail (buf);
     }
 
-  if (Options.show_summary) {
-    if (!global_new && !global_unread) {
-      printf("no new mail\n");
-    } else {
+  if (Options.show_summary && (global_new || global_unread)) {
       printf("Total %d new %d unread\n", global_new, global_unread);
-    }
   } else {
     printf(info);
   }

@@ -289,17 +289,10 @@ check_for_mail (char *tmppath)
 {
   struct stat st;
   char *mailpath;
-  int brief_name_offset= 0;
 
   /* expand environment variables in path specifier */
   mailpath= expand_envstr (tmppath);
   
-  /* in brief mode, print relative paths for mailboxes/maildirs inside home
-   * directory */
-  if (strncmp(mailpath, Homedir, strlen(Homedir)) == 0) {
-    brief_name_offset= strlen(Homedir) + 1;
-  }
-
   if (!stat (mailpath, &st)) {
     /* Is it regular file? (if yes, it should be mailbox ;) */
     if (S_ISREG (st.st_mode)) {

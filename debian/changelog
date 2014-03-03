@@ -1,3 +1,9 @@
+mailcheck (1.91.2-2-ke5) unstable; urgency=low
+
+  * Shorter output
+
+ -- Kamil Essekkat <kamil@essekkat.pl>  Mon, 03 Mar 2014 15:55:38 +0100
+
 mailcheck (1.91.2-2-ke4) unstable; urgency=low
 
   * Be quiet if no mail is found

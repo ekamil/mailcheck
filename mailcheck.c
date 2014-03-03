@@ -388,7 +388,10 @@ main (int argc, char *argv[])
     }
 
   if (Options.show_summary && (global_new || global_unread)) {
-      printf("Total %d new %d unread\n", global_new, global_unread);
+    char info[30];
+    if (global_new) { sprintf(info, "%d new", global_new); }
+    if (global_unread) { sprintf(info, "%d unread", global_unread); }
+    printf("%s\n", info);
   } else {
     printf(info);
   }
